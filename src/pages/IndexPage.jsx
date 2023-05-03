@@ -3,8 +3,10 @@ import React from 'react'
 
 const IndexPage = () => {
   return (
-    <div>
-      Welcome Page 
+    <div className='justify-center items-center mt-8 text-center'>
+      <div className='text-2xl mt-8 underline'>
+        Animals data Storage Center
+      </div>
        
     </div>
   )
