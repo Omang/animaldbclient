@@ -4,6 +4,9 @@ import UsernavPage from "./UsernavPage"
 import { Navigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../UserContext";
+import NotificationContext from "../NotificationContext";
+
+
 
 
 const AnimaleditPage = () => {
@@ -21,6 +24,8 @@ const AnimaleditPage = () => {
     const [redirect, setRedirect] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] =useState(null);
+    const {notificationHandler} = useContext(NotificationContext);
+
 
     const {refreshToken} = user;
 
@@ -80,11 +85,17 @@ const AnimaleditPage = () => {
             }
           })
         setLoading(false);
+        
+        notificationHandler({type:'warning', message:'Animal Updated successfully...Thanks'});
+       
         setRedirect(<Navigate to={`/account/owners/getanimal/${animalid}/${ownerid}`} />)
 
         }catch(e){
 
           setLoading(false);
+          
+        notificationHandler({type:'error', message:'Oops!.Something wrong happend..Try again'});
+       
           setError(e.message);
 
         }
@@ -99,7 +110,7 @@ const AnimaleditPage = () => {
          <UsernavPage />
          
       {error && (
-        <div className="mt-8 justify-center  text-center">
+        <div className="mt-32 justify-center  text-center">
           <div className="rounded-full border-green-500">
             <h1 className="text-xl">
               {error}
@@ -109,11 +120,11 @@ const AnimaleditPage = () => {
       )}
          {
       loading ?
-      <div className="mt-8 justify-center  text-center">
+      <div className="mt-32 justify-center  text-center">
       <GridLoader color={'#7ED321'} loading={loading} size={20} />
       </div>
       :
-        <div className="mt-8 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
+        <div className="mt-32 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
                 <h2 className="text-2xl mt-4 text-center font-bold">Animal Form</h2>
                 <form className='py-2 px-4' onSubmit={updateAnimal}>
                     <h2 className="text-xl mt-1">Animal name</h2>

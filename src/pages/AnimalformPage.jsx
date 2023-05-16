@@ -4,6 +4,7 @@ import UsernavPage from "./UsernavPage"
 import { Navigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../UserContext";
+import NotificationContext from "../NotificationContext";
 
 const AnimalformPage = () => {
 
@@ -19,6 +20,8 @@ const AnimalformPage = () => {
     const [redirect, setRedirect] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] =useState(null);
+    const {notificationHandler} = useContext(NotificationContext);
+
 
     async function addNewanimal(ev){
         ev.preventDefault();
@@ -42,11 +45,17 @@ const AnimalformPage = () => {
             }
           })
         setLoading(false);
+        
+        notificationHandler({type:'success', message:'New Animal Added...Thanks'});
+       
         setRedirect(<Navigate to={'/account/owners/owner/'+id} />) 
           
         }catch(e){
 
           setLoading(false);
+          
+        notificationHandler({type:'error', message:'Oops!.Somthing wrong happend..Try again'});
+       
           setError(e.message);
 
         }
@@ -61,7 +70,7 @@ const AnimalformPage = () => {
         <UsernavPage />
         
       {error && (
-        <div className="mt-8 justify-center  text-center">
+        <div className="mt-32 justify-center  text-center">
           <div className="rounded-full border-green-500">
             <h1 className="text-xl">
               {error}
@@ -71,34 +80,34 @@ const AnimalformPage = () => {
       )}
         {
       loading ?
-      <div className="mt-8 justify-center  text-center">
+      <div className="mt-32 justify-center  text-center">
       <GridLoader color={'#7ED321'} loading={loading} size={20} />
       </div>
       :
         
-        <div className="mt-8 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
+        <div className="mt-32 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
                 <h2 className="text-2xl mt-4 text-center font-bold">Animal Form</h2>
                 <form className='py-2 px-4' onSubmit={addNewanimal}>
                     <h2 className="text-xl mt-1">Animal name</h2>
-                    <input value={animalname} onChange={ev => setAnimalname(ev.target.value)} className="border-green-500" 
+                    <input required value={animalname} onChange={ev => setAnimalname(ev.target.value)} className="border-green-500" 
                     type="text" placeholder="name" />
                      <h2 className="text-xl mt-1">Chip Number</h2>
-                    <input value={animalchip} onChange={ev => setAnimalchip(ev.target.value)} className="border-green-500" 
+                    <input required value={animalchip} onChange={ev => setAnimalchip(ev.target.value)} className="border-green-500" 
                     type="text" placeholder="chip" />
                      <h2 className="text-xl mt-1">Animal breed</h2>
-                    <input value={animalbreed} onChange={ev => setAnimalbreed(ev.target.value)} className="border-green-500" 
+                    <input required value={animalbreed} onChange={ev => setAnimalbreed(ev.target.value)} className="border-green-500" 
                     type="text" placeholder="breed" />
                      <h2 className="text-xl mt-1">Animal type</h2>
-                    <input value={animaltype} onChange={ev => setAnimaltype(ev.target.value)} className="border-green-500" 
+                    <input required value={animaltype} onChange={ev => setAnimaltype(ev.target.value)} className="border-green-500" 
                     type="text" placeholder="type" />
                      <h2 className="text-xl mt-1">Animal color</h2>
-                    <input value={animalcolor} onChange={ev => setAnimalcolor(ev.target.value)} className="border-green-500" 
+                    <input required value={animalcolor} onChange={ev => setAnimalcolor(ev.target.value)} className="border-green-500" 
                     type="text" placeholder="color" />
                      <h2 className="text-xl mt-1">Animal gender</h2>
-                    <input value={animalsex} onChange={ev => setAnimalsex(ev.target.value)} className="border-green-500" 
+                    <input required value={animalsex} onChange={ev => setAnimalsex(ev.target.value)} className="border-green-500" 
                     type="text" placeholder="sex" />
                     
-                    <button  className="justify-center py-2 px-4 rounded-2xl">Create</button>
+                    <button type="submit"  className="border border-green-500 hover:bg-green-500 justify-center py-2 px-4 rounded-2xl">Create</button>
                 </form>
                </div>
 }

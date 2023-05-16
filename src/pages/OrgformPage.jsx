@@ -6,6 +6,9 @@ import { UserContext } from "../UserContext"
 import AccountnavPage from "./AccountnavPage";
 import { Navigate, useParams } from "react-router-dom";
 
+import NotificationContext from "../NotificationContext";
+
+
 const OrgformPage = () => {
     const {id}= useParams();
     const [orgname, setOrgname] = useState('');
@@ -14,6 +17,7 @@ const OrgformPage = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] =useState(null);
     const {user} = useContext(UserContext);
+    const {notificationHandler} = useContext(NotificationContext);
 
     useEffect(()=>{
       if(!id){
@@ -34,7 +38,7 @@ const OrgformPage = () => {
         }
 
       }).catch(err=>{
-        setLoading(false);
+        setLoading(false);    
         setError(err.message);
        
        });
@@ -58,13 +62,19 @@ const OrgformPage = () => {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${refreshToken}` 
             }
-          });
-          setLoading(false);
+          }).then(response=>{
+            setLoading(false);
+          notificationHandler({type:'warning', message:'Organisation Updated successfully...'});
           setRedirect(<Navigate to={'/account/org/'+id} />);
+          }).catch(err=>{
+            notificationHandler({type:'error', message:'Update Failed..Try again.'});
+            throw err;
+          });
+          
 
         }else{
 
-          const {data} = await axios.post('/org/createorg',{
+            axios.post('/org/createorg',{
             org_name: orgname,
             org_description: orgdis
         }, {
@@ -72,9 +82,15 @@ const OrgformPage = () => {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${refreshToken}` 
             }
-          });
-    setLoading(false);   
-     setRedirect(<Navigate to={'/account/org/'+data._id} />);
+          }).then(response=>{
+             setLoading(false);
+             notificationHandler({type:'success', message:'Organisation created successfully.'});   
+        setRedirect(<Navigate to={'/account/org/'+response.data._id} />);
+          }).catch(err=>{
+            notificationHandler({type:'error', message:'Update Failed..Try again.'});
+            throw err;
+          });;
+       
 
         }
    
@@ -106,7 +122,7 @@ const OrgformPage = () => {
       </div>
       :
 
-    <div className="mt-8 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
+    <div className="mt-32 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
                 <h2 className="text-2xl mt-4 text-center font-bold">Organisation Form</h2>
                 <form className='py-2 px-4' onSubmit={addNeworg}>
                     <h2 className="text-xl mt-4">Organisation name</h2>

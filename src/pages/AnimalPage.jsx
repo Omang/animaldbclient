@@ -47,7 +47,7 @@ const AnimalPage = () => {
        <UsernavPage />
        
       {error && (
-        <div className="mt-8 justify-center  text-center">
+        <div className="mt-32 justify-center  text-center">
           <div className="rounded-full border-green-500">
             <h1 className="text-xl">
               {error}
@@ -57,7 +57,7 @@ const AnimalPage = () => {
       )}
        {
       loading ?
-      <div className="mt-8 justify-center  text-center">
+      <div className="mt-32 justify-center  text-center">
       <GridLoader color={'#7ED321'} loading={loading} size={20} />
       </div>
       :
@@ -65,7 +65,7 @@ const AnimalPage = () => {
        {animal && (
   <div>
 
-       <div className=" flex overflow-hidden mb-4 border gap-2 border-green-300 shadow shadow-green-200 rounded-2xl m-8">
+       <div className="mt-32 flex overflow-hidden mb-4 border gap-2 border-green-300 shadow shadow-green-200 rounded-2xl m-8">
       <div className="w-28 h-84 grow text-center py-2 px-4">
         <h1 className="flex text-xl items-center justify-center"><FaHorseHead />{animal.animal_name}</h1> <br>
          </br><div className="inline-flex items-center gap-2 border-green-500 border-b"><label className="py-2 px-1 text-xl">Animal_name: </label><p className="py-2 ">{animal.animal_name}</p></div><br />

@@ -61,7 +61,7 @@ const OrgmainPage = () => {
       <GridLoader color={'#7ED321'} loading={loading} size={10} />
       </div>
       :
-     <div className=" flex overflow-hidden mb-4 border gap-2 border-green-300 shadow shadow-green-200 rounded-2xl m-8">
+     <div className=" flex overflow-hidden mb-4 border gap-2 border-green-300 shadow shadow-green-200 rounded-2xl mt-32 m-8">
      
       <div className="w-32 h-32 grow  py-2 px-4">
         <h1 className="text-xl flex items-center justify-center text-center"><FaHospitalSymbol color="green" />{org.org_name}</h1><br>

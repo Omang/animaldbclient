@@ -4,11 +4,12 @@ import UsernavPage from "./UsernavPage"
 import { UserContext } from "../UserContext";
 import axios from "axios";
 import { Navigate, useParams } from "react-router-dom";
+import NotificationContext from "../NotificationContext";
 
 const OwnerformPage = () => {
   const {id} = useParams();
     const {user} = useContext(UserContext); 
-    console.log(user);
+   
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
@@ -19,6 +20,8 @@ const OwnerformPage = () => {
     const [redirect, setRedirect] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] =useState(null);
+    const {notificationHandler} = useContext(NotificationContext);
+
 
    const {refreshToken} = user;
 
@@ -76,6 +79,8 @@ const OwnerformPage = () => {
             }
           });
           setLoading(false);
+          notificationHandler({type:'warning', message:'Owner updated success...Thanks'});
+        
           setRedirect(<Navigate to={'/account/owners/owner/'+id} />);
   
         }else{
@@ -91,6 +96,8 @@ const OwnerformPage = () => {
             }
           })
           setLoading(false);
+          notificationHandler({type:'success', message:'New Owner Created successfully...Thanks'});
+        
           setRedirect(<Navigate to={'/account/owners/owner/'+data._id} />)
         
         }
@@ -98,6 +105,8 @@ const OwnerformPage = () => {
       }catch(e){
 
         setLoading(false);
+        notificationHandler({type:'error', message:'Oops!.Something wrong happend..Try again'});
+        
         setError(e.message);
 
       }
@@ -110,7 +119,7 @@ const OwnerformPage = () => {
         <UsernavPage />
         
       {error && (
-        <div className="mt-8 justify-center  text-center">
+        <div className="mt-32 justify-center  text-center">
           <div className="rounded-full border-green-500">
             <h1 className="text-xl">
               {error}
@@ -120,32 +129,32 @@ const OwnerformPage = () => {
       )}
         {
       loading ?
-      <div className="mt-8 justify-center  text-center">
+      <div className="mt-32 justify-center  text-center">
       <GridLoader color={'#7ED321'} loading={loading} size={20} />
       </div>
       :
-        <div className="mt-8 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
+        <div className="mt-32 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
                 <h2 className="text-2xl mt-4 text-center font-bold">Owner Form</h2>
                 <form className='py-2 px-4' onSubmit={addNewowner}>
                     <h2 className="text-xl mt-1">Firstname</h2>
-                    <input value={firstname} onChange={ev => setFirstname(ev.target.value)} className="border-green-500" 
+                    <input required value={firstname} onChange={ev => setFirstname(ev.target.value)} className="border-green-500" 
                     type="text" placeholder="Firstname" />
                     <h2 className="text-xl mt-1">Lastname</h2>
-                    <input value={lastname} onChange={ev => setLastname(ev.target.value)} className="border-green-500" 
+                    <input required value={lastname} onChange={ev => setLastname(ev.target.value)} className="border-green-500" 
                     type="text" placeholder="Lastname" />
                     <h2 className="text-xl mt-1">Email</h2>
-                    <input value={email} onChange={ev => setEmail(ev.target.value)} className="border-green-500" 
+                    <input required value={email} onChange={ev => setEmail(ev.target.value)} className="border-green-500" 
                     type="email" placeholder="Email" />
                     <h2 className="text-xl mt-1">Plot Number</h2>
-                    <input value={plotnum} onChange={ev => setPlotnum(ev.target.value)} className="border-green-500" 
+                    <input required value={plotnum} onChange={ev => setPlotnum(ev.target.value)} className="border-green-500" 
                     type="number" placeholder="Location plot number" />
                     <h2 className="text-xl mt-1">Village / Town</h2>
-                    <input value={town} onChange={ev => setTown(ev.target.value)} className="border-green-500" 
+                    <input required value={town} onChange={ev => setTown(ev.target.value)} className="border-green-500" 
                     type="text" placeholder="Town" />
                     <h2 className="text-xl mt-1">Mobile</h2>
-                    <input value={mobile} onChange={ev => setMobile(ev.target.value)} className="border-green-500 w-full border my-2 py-2 px-2 rounded-2xl" 
+                    <input required value={mobile} onChange={ev => setMobile(ev.target.value)} className="border-green-500 w-full border my-2 py-2 px-2 rounded-2xl" 
                     type="number" placeholder="Contact number" />
-                    <button  className="justify-center py-2 px-4 rounded-2xl">Create</button>
+                    <button type="submit" className="hover:bg-green-500 border border-green-500 justify-center py-2 px-4 rounded-2xl">Create</button>
                 </form>
                </div>
 }

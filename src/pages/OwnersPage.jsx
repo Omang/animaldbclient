@@ -47,7 +47,7 @@ const OwnersPage = () => {
         <UsernavPage />
         
       {error && (
-        <div className="mt-8 justify-center  text-center">
+        <div className="mt-32 justify-center  text-center">
           <div className="rounded-full border-green-500">
             <h1 className="text-xl">
               {error}
@@ -57,12 +57,12 @@ const OwnersPage = () => {
       )}
         {
       loading ?
-      <div className="mt-8 justify-center  text-center">
+      <div className="mt-32 justify-center  text-center">
       <GridLoader color={'#7ED321'} loading={loading} size={20} />
       </div>
       :
         <div>
-        <div className="mt-8 text-center">
+        <div className="mt-32 text-center">
         <Link className="bg-green-400 text-white py-2 px-4 rounded-2xl" to={'/account/owners/new'}>Add new Owner</Link>
              </div>
         <div className="relative w-auto flex flex-col shadow-lg mb-6 mt-4">

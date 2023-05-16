@@ -17,7 +17,7 @@ const AccountnavPage = () => {
        return classes;
     }
   return (
-    <nav className="w-full flex justify-center mt-8 gap-4 ">
+    <nav className="mb-8 bg-green-100 bg-opacity-70 fixed w-full flex justify-center mt-8 gap-4 ">
     <Link className={linkClasses('profile')} to={'/account'}>Account</Link>
     <Link className={linkClasses('org')} to={'/account/org'}>organisations</Link>
     <Link className={linkClasses('animals')} to={'/account/animals'}>animals</Link>

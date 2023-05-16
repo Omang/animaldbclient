@@ -4,6 +4,8 @@ import { Link, Navigate } from 'react-router-dom'
 import BarLoader from 'react-spinners/BarLoader'
 import {FaTelegramPlane} from "react-icons/fa";
 import { UserContext } from '../UserContext';
+import NotificationContext from "../NotificationContext";
+
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -12,6 +14,7 @@ const LoginPage = () => {
     const [loading, setLoading] = useState(false);
     const [redirect, setRedirect] = useState(false);
     const {setUser, setReady} = useContext(UserContext);
+    const {notificationHandler} = useContext(NotificationContext);
 
     function closeerror(ev){
       ev.preventDefault();
@@ -25,17 +28,17 @@ const LoginPage = () => {
     const {data} = await axios.post('user/login', {email,password});
         setUser(data); 
         setReady(true);
-       localStorage.setItem('token', data.refreshToken);
-       localStorage.setItem('lays', data );
-        alert('login successful');
         setLoading(false);
+        notificationHandler({type:'success', message:'Login success...Welcome'});
         setRedirect(true);
+
         
        } catch (e) {
-          alert('login failed, try again')
+          
           setLoading(false);
           //console.log(e.response.data.message);
           setHandlerror(e.response.data.message);
+          notificationHandler({type:'error', message:'Oops! Wrong happend...Try again'});
        }
     }
     if(redirect){
@@ -55,9 +58,9 @@ const LoginPage = () => {
          <p className='px-4 text-white'>{handlerror}</p><button onClick={closeerror} className='bg-red-500 px-4 text-white'>X</button>
        </div>
       )}
-        <input type="email" placeholder='your@email.com' value={email} onChange={ev =>setEmail(ev.target.value)} />
-        <input type="password" placeholder='your password' value={password} onChange={ev=> setPassword(ev.target.value)} />
-        <button className='flex  justify-center items-center primary hover:bg-green-300'><FaTelegramPlane />Login</button>
+        <input required type="email" placeholder='your@email.com' value={email} onChange={ev =>setEmail(ev.target.value)} />
+        <input required type="password" placeholder='your password' value={password} onChange={ev=> setPassword(ev.target.value)} />
+        <button type='submit' className='flex  justify-center items-center primary hover:bg-green-300'><FaTelegramPlane />Login</button>
       
      </form>
     </div>

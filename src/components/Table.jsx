@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useGlobalFilter, useSortBy, useTable } from "react-table";
-import {FaTelegramPlane, FaRenren, FaHouseUser} from "react-icons/fa";
+import {FaTelegramPlane, FaRenren, FaHouseUser, FaArrowDown, FaArrowUp} from "react-icons/fa";
 import Searchdb from "./Searchdb";
 
 
@@ -91,7 +91,7 @@ const initialState = {hiddenColumns: ['_id']};
 
   // Render the UI for your table and the styles
   return (
-  <div className="mt-2 flex flex-col">
+  <div className="mt-16 flex flex-col">
 
 
         <Searchdb preGlobalFilteredRows={preGlobalFilteredRows} 
@@ -110,7 +110,7 @@ const initialState = {hiddenColumns: ['_id']};
                                         {headerGroup.headers.map((column)=>(
                                           <th {...column.getHeaderProps(column.getSortByToggleProps())} className="px-6 py-5 text-left text-20 font-medium text-gray-400 uppercase rounded-sm tracking-wider">
                                              {column.render("Header")} 
-                                             {column.isSorted ? (column.isSortedDesc ? ">" : "<") : "" }
+                                             {column.isSorted ? (column.isSortedDesc ? <FaArrowDown/> : <FaArrowUp/>) : "" }
                                           </th>
                                         ))}
 

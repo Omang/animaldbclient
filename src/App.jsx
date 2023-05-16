@@ -24,6 +24,7 @@ import AnimalformPage from './pages/AnimalformPage'
 import AnimalPage from './pages/AnimalPage'
 import AnimaleditPage from './pages/AnimaleditPage'
 import AnimalownerPage from './pages/AnimalownerPage'
+import Notification from './utils/Notification'
 
 
 axios.defaults.baseURL = 'http://127.0.0.1:5000/api';
@@ -60,6 +61,7 @@ function App() {
       </Route>
       
     </Routes>
+    <Notification />
     </UserContextProvider> 
       
   )
