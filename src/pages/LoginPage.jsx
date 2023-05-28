@@ -50,7 +50,7 @@ const LoginPage = () => {
       loading ?
       <BarLoader color={'#7ED321'} loading={loading} size={100} />
       :
-      <div className='mb-64 border border-spacing-2 rounded-2xl p-2 border-green-500'>
+      <div className='mb-64 border border-spacing-2 rounded-2xl p-2 bg-green-50 bg-opacity-90 border-green-500'>
     <h1 className="text-4xl text-center mb-4">Login</h1>
      <form className='max-w-md mx-auto' onSubmit={handleSubmit}>
       {!!handlerror && (

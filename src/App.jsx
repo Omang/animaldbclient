@@ -25,10 +25,12 @@ import AnimalPage from './pages/AnimalPage'
 import AnimaleditPage from './pages/AnimaleditPage'
 import AnimalownerPage from './pages/AnimalownerPage'
 import Notification from './utils/Notification'
+const datax = import.meta.env.VITE_REACT_APP_SERVER_URL
 
-
-axios.defaults.baseURL = 'http://127.0.0.1:5000/api';
+axios.defaults.baseURL = datax;
 axios.defaults.withCredentials = true;
+axios.defaults.credentials = 'include';
+axios.defaults.headers = {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}
 
 function App() {
 
