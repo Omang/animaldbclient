@@ -20,12 +20,7 @@ const AccountPage = () => {
   
     async function Logout(){
        const {refreshToken} = user;
-        await axios.get('/user/logout', {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${refreshToken}` 
-            }
-          });
+        await axios.post('/user/logout',{refreshToken: refreshToken});
          
           notificationHandler({type:'warning', message:'Logout success...Next time'});
         setRedirect('/');

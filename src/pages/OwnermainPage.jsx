@@ -50,7 +50,8 @@ const OwnermainPage = () => {
       return (
     <div>
         <UsernavPage />
-        
+      <div className="pt-16">
+          
       {error && (
         <div className="mt-32 justify-center  text-center">
           <div className="rounded-full border-green-500">
@@ -66,7 +67,8 @@ const OwnermainPage = () => {
       <GridLoader color={'#7ED321'} loading={loading} size={20} />
       </div>
       :
-        <div className="mt-32 flex overflow-hidden mb-4 border gap-2 border-green-300 shadow shadow-green-200 rounded-2xl m-8">
+        <div className="pt-16">
+          <div className="mt-8 flex overflow-hidden mb-4 border gap-2 border-green-300 shadow shadow-green-200 rounded-2xl m-8">
       <div className="w-28 h-84 grow text-center py-2 px-4">
         <h1 className="flex justify-center items-center text-xl text-center"><FaHouseUser />{owner.last_name} Details</h1> <br>
          </br><div className="inline-flex gap-2 border-green-500 border-b"><label className="py-2 px-1 font-bold">Fullname: </label><p className="py-2 ">{owner.first_name} {owner.last_name}</p></div><br />
@@ -100,7 +102,9 @@ const OwnermainPage = () => {
        ))}
       </div>
      </div>
+        </div>
 }
+      </div>
     </div>
   )
 }

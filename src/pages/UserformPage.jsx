@@ -68,7 +68,8 @@ const UserformPage = () => {
     <div>
          <AccountnavPage />
          
-      {error && (
+      <div className="pt-16">
+         {error && (
         <div className="mt-8 justify-center  text-center">
           <div className="rounded-full border-green-500">
             <h1 className="text-xl">
@@ -83,7 +84,8 @@ const UserformPage = () => {
       <GridLoader color={'#7ED321'} loading={loading} size={20} />
       </div>
       :
-         <div className="mt-32 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
+         <div>
+             <div className="mt-8 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
                 <h2 className="text-2xl mt-4 text-center font-bold">Add User Form</h2>
                 <form className='py-2 px-4' onSubmit={addNewuser}>
                     <h2 className="text-xl mt-1">Firstname</h2>
@@ -107,7 +109,9 @@ const UserformPage = () => {
                     <button type="submit"  className="border-green-500 border  justify-center hover:bg-green-500 py-2 px-4 rounded-2xl">create</button>
                 </form>
                </div>
-}    
+         </div>
+}     
+      </div>
     </div>
   )
 }

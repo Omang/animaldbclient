@@ -35,7 +35,7 @@ const OrganimalPage = () => {
     <div>
       <UsernavPage />
 
-     <div>
+     <div className="pt-16">
       
      {error && (
         <div className="mt-8 justify-center  text-center">
@@ -52,7 +52,9 @@ const OrganimalPage = () => {
       <GridLoader color={'#7ED321'} loading={loading} size={20} />
       </div>
       :
-     <Table datax={animal} />
+     <div >
+       <Table datax={animal} />
+     </div>
 }
      </div>
     </div>

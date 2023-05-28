@@ -43,7 +43,8 @@ const OrgsPage = ()=>{
     return (
         <div>
             <AccountnavPage />
-            
+       <div className="pt-16">
+              
       {error && (
         <div className="mt-8 justify-center  text-center">
           <div className="rounded-full border-green-500">
@@ -54,7 +55,7 @@ const OrgsPage = ()=>{
         </div>
       )}
            
-              <div className="mt-32 text-center">
+              <div className="pt-32 text-center">
               <Link className="bg-green-400 text-white py-2 px-4 rounded-2xl" to={'/account/org/new'}>Add new Organisation</Link>
              </div>
              {
@@ -63,11 +64,12 @@ const OrgsPage = ()=>{
       <GridLoader color={'#7ED321'} loading={loading} size={20} />
       </div>
       :
-           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-4 w-full gap-4  justify-center">
+          <div>
+             <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-4  justify-center">
            {orgs.length > 0 && orgs.map(org => (
             <div className="grid    
-            py-2 px-4 border border-green-400
-             shadow shadow-green-300 p-4 rounded-2xl" key={org._id}>
+            py-2 px-2 border border-green-400
+             shadow shadow-green-300 p-2 rounded-2xl w-[250px] h-[140px]" key={org._id}>
                 <Link to={'/account/org/'+org._id} 
                  >
                     <h1 className="text-2xl flex items-center justify-center"><FaHospitalSymbol color="green"/>{org.org_name}</h1>
@@ -77,7 +79,9 @@ const OrgsPage = ()=>{
                 </div>
             ))}
            </div>
+          </div>
        }
+       </div>
            
         </div>
     )

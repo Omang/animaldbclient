@@ -109,7 +109,8 @@ const AnimaleditPage = () => {
     <div>
          <UsernavPage />
          
-      {error && (
+        <div className="pt-16">
+            {error && (
         <div className="mt-32 justify-center  text-center">
           <div className="rounded-full border-green-500">
             <h1 className="text-xl">
@@ -124,7 +125,8 @@ const AnimaleditPage = () => {
       <GridLoader color={'#7ED321'} loading={loading} size={20} />
       </div>
       :
-        <div className="mt-32 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
+        <div>
+            <div className="mt-8 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
                 <h2 className="text-2xl mt-4 text-center font-bold">Animal Form</h2>
                 <form className='py-2 px-4' onSubmit={updateAnimal}>
                     <h2 className="text-xl mt-1">Animal name</h2>
@@ -149,7 +151,9 @@ const AnimaleditPage = () => {
                     <button  className="hover:bg-green-500 text-white justify-center py-2 px-4 rounded-2xl">Update</button>
                 </form>
                </div>
+        </div>
 }
+        </div>
     </div>
   )
 }

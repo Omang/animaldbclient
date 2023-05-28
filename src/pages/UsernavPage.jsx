@@ -17,7 +17,7 @@ const UsernavPage = () => {
     }
   return (
     <div>
-         <nav className="mb-8 bg-green-100 bg-opacity-70 fixed w-full flex justify-center mt-8 gap-4 ">
+         <nav className="mb-8 bg-green-100 bg-opacity-70 z-[1] fixed w-full flex justify-center mt-8 gap-4 ">
     <Link className={linkClasses('profile')} to={'/account'}>Account</Link>
     <Link className={linkClasses('owners')} to={'/account/owners'}>Owners</Link>
     <Link className={linkClasses('organimals')} to={'/account/organimals'}>Animals</Link>

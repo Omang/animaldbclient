@@ -105,7 +105,8 @@ const OrgformPage = () => {
     <div>
         <AccountnavPage />
         
-      {error && (
+      <div className="pt-16">
+        {error && (
         <div className="mt-8 justify-center  text-center">
           <div className="rounded-full border-green-500">
             <h1 className="text-xl">
@@ -122,7 +123,8 @@ const OrgformPage = () => {
       </div>
       :
 
-    <div className="mt-32 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
+    <div className="">
+      <div className="mt-8 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
                 <h2 className="text-2xl mt-4 text-center font-bold">Organisation Form</h2>
                 <form className='py-2 px-4' onSubmit={addNeworg}>
                     <h2 className="text-xl mt-4">Organisation name</h2>
@@ -132,7 +134,9 @@ const OrgformPage = () => {
                     <button  className="justify-center py-2 px-4 rounded-2xl">create</button>
                 </form>
                </div>
+    </div>
 }
+      </div>
                </div>
   )
 }

@@ -68,7 +68,8 @@ const AnimalformPage = () => {
   return (
     <div>
         <UsernavPage />
-        
+      <div className="pt-16">
+          
       {error && (
         <div className="mt-32 justify-center  text-center">
           <div className="rounded-full border-green-500">
@@ -85,7 +86,8 @@ const AnimalformPage = () => {
       </div>
       :
         
-        <div className="mt-32 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
+        <div >
+          <div className="mt-8 max-w-md mx-auto justify- border-green-500 border rounded-2xl">
                 <h2 className="text-2xl mt-4 text-center font-bold">Animal Form</h2>
                 <form className='py-2 px-4' onSubmit={addNewanimal}>
                     <h2 className="text-xl mt-1">Animal name</h2>
@@ -110,7 +112,9 @@ const AnimalformPage = () => {
                     <button type="submit"  className="border border-green-500 hover:bg-green-500 justify-center py-2 px-4 rounded-2xl">Create</button>
                 </form>
                </div>
+        </div>
 }
+      </div>
     </div>
   )
 }
