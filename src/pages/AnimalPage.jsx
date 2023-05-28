@@ -16,7 +16,7 @@ const AnimalPage = () => {
 
      const getanimaly = ()=>{
       setLoading(true);
-      axios.get('animal/getanimal/'+animalid, {
+      axios.get('/api/animal/getanimal/'+animalid, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${refreshToken}` 

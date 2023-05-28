@@ -16,7 +16,7 @@ const AnimalownerPage = () => {
 
     const getowner = async()=>{
       setLoading(true);
-        const {data} = await axios.get('/animal/getanimalowner/'+id);
+        const {data} = await axios.get('/api/animal/getanimalowner/'+id);
         setLoading(false);
       setOwner(data);
      

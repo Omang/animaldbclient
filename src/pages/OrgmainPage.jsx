@@ -17,7 +17,7 @@ const OrgmainPage = () => {
     const getmain = ()=>{
 
       setLoading(true);
-      axios.get('/org/getorg/'+id, {
+      axios.get('/api/org/getorg/'+id, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${refreshToken}` 

@@ -17,7 +17,7 @@ const OwnersPage = () => {
     const allowners = async()=>{
       setLoading(true);
       try{
-       const {data} = await axios.get('/owner/allowners', {
+       const {data} = await axios.get('/api/owner/allowners', {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${user.refreshToken}` 

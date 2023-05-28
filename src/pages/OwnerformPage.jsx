@@ -27,7 +27,7 @@ const OwnerformPage = () => {
 
    const getstuffy =()=>{
     setLoading(true);
-    axios.get('/owner/owner/'+id, {
+    axios.get('/api/owner/owner/'+id, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${refreshToken}` 
@@ -67,7 +67,7 @@ const OwnerformPage = () => {
 
         if(id){
         
-          await axios.put('/owner/updateowner',{
+          await axios.put('/api/owner/updateowner',{
             owner_id:id,
             first_name:firstname, last_name: lastname,
             email: email, mobile: mobile, 
@@ -84,7 +84,7 @@ const OwnerformPage = () => {
           setRedirect(<Navigate to={'/account/owners/owner/'+id} />);
   
         }else{
-          const {data} = await axios.post('/owner/createowner', {
+          const {data} = await axios.post('/api/owner/createowner', {
             first_name:firstname, last_name: lastname,
              email: email, mobile: mobile, 
              plot_num:plotnum, street_map: town

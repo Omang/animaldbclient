@@ -11,7 +11,7 @@ const OrganimalPage = () => {
 
   const getAnimal = async()=>{
     setLoading(true);
-    axios.get('/animal/getallanimals')
+    axios.get('/api/animal/getallanimals')
          .then(({data})=>{
              setLoading(false);
              setAnimal(data);

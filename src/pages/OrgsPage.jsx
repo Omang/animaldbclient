@@ -16,7 +16,7 @@ const OrgsPage = ()=>{
     const {refreshToken} = user;
     const getstuff = ()=>{
       setLoading(true);
-      axios.get('/org/getallorgs', {
+      axios.get('/api/org/getallorgs', {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${refreshToken}` 

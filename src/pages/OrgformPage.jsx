@@ -25,7 +25,7 @@ const OrgformPage = () => {
       }
       const {refreshToken} = user;
       setLoading(true);
-      axios.get('/org/getorg/'+id, {
+      axios.get('/api/org/getorg/'+id, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${refreshToken}` 
@@ -53,7 +53,7 @@ const OrgformPage = () => {
 
         if(id){
           
-          axios.put('/org/updateorg',{
+          axios.put('/api/org/updateorg',{
             id:id,
             org_name: orgname,
             org_description: orgdis
@@ -74,7 +74,7 @@ const OrgformPage = () => {
 
         }else{
 
-            axios.post('/org/createorg',{
+            axios.post('/api/org/createorg',{
             org_name: orgname,
             org_description: orgdis
         }, {

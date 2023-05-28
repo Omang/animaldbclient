@@ -11,7 +11,7 @@ export function UserContextProvider({children}){
 
     if(!user){
       //const token = user.token;
-      axios.get('/user/profile').then(({data})=>{
+      axios.get('/api/user/profile').then(({data})=>{
           
         setUser(data);
         setReady(true);

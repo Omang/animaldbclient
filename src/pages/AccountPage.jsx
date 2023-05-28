@@ -20,7 +20,7 @@ const AccountPage = () => {
   
     async function Logout(){
        const {refreshToken} = user;
-        await axios.post('/user/logout',{refreshToken: refreshToken});
+        await axios.post('/api/user/logout',{refreshToken: refreshToken});
          
           notificationHandler({type:'warning', message:'Logout success...Next time'});
         setRedirect('/');

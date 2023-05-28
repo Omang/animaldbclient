@@ -12,7 +12,7 @@ const AllanimalsPage = () => {
   const getAnimal = ()=>{
     setLoading(true);
    
-    axios.get('/animal/getallanimals')
+    axios.get('/api/animal/getallanimals')
          .then(({data})=>{
              setLoading(false);
              setError(null);

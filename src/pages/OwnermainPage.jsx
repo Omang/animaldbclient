@@ -21,7 +21,7 @@ const OwnermainPage = () => {
 
     const getowneris = ()=>{
       setLoading(true);
-        axios.get('/owner/owner/'+id, {
+        axios.get('/api/owner/owner/'+id, {
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${refreshToken}` 

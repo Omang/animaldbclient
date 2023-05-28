@@ -31,7 +31,7 @@ const AnimaleditPage = () => {
 
     const getanimalx = ()=>{
       setLoading(true);
-      axios.get('animal/getanimal/'+animalid, {
+      axios.get('/api/animal/getanimal/'+animalid, {
          headers: {
            'Content-Type': 'application/json',
            'Authorization': `Bearer ${refreshToken}` 
@@ -73,7 +73,7 @@ const AnimaleditPage = () => {
 
         try{
 
-           await axios.put('/animal/update_animal',{
+           await axios.put('/api/animal/update_animal',{
            animal_name: animalname, animal_chip: animalchip,
            animal_breed: animalbreed, animal_type: animaltype,
            animal_color: animalcolor,

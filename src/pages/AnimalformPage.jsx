@@ -33,7 +33,7 @@ const AnimalformPage = () => {
 
         try{
 
-         await axios.post('/animal/addanimal',{
+         await axios.post('/api/animal/addanimal',{
            animal_name: animalname, animal_chip: animalchip,
            animal_breed: animalbreed, animal_type: animaltype,
            animal_color: animalcolor,
