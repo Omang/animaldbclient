@@ -31,7 +31,7 @@ const UserformPage = () => {
         setLoading(true);
         try{
 
-          const {data}=  await axios.post('/apiuser/adduser',{
+          const {data}=  await axios.post('/api/user/adduser',{
             org : id,
             firstname: firstname,
             lastname: lastname,
