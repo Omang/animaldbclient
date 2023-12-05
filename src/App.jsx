@@ -23,6 +23,7 @@ import AnimalformPage from './pages/AnimalformPage'
 import AnimalPage from './pages/AnimalPage'
 import AnimaleditPage from './pages/AnimaleditPage'
 import AnimalownerPage from './pages/AnimalownerPage'
+import AnimalhealthPage from './pages/AnimalhealthPage'
 import Notification from './utils/Notification'
 const datax = import.meta.env.VITE_REACT_APP_SERVER_URL
 
@@ -51,6 +52,7 @@ function App() {
       <Route path='/account/owners/addanimal/:id' element={<AnimalformPage />} />
       <Route path='/account/owners/getanimal/:animalid/:ownerid' element={<AnimalPage />} />
       <Route path='/account/owners/updateanimal/:animalid/:ownerid' element={<AnimaleditPage />} />
+      <Route path='/account/owners/animalhealth/:animalid/:ownerid' element={<AnimalhealthPage />} />
       <Route path='/account/owners/updateowner/:id' element={<OwnerformPage />} />
       <Route path='/account/owners/new' element={<OwnerformPage />} />
       <Route path='/account/organimals' element={<OrganimalPage />} />   

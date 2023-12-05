@@ -87,19 +87,40 @@ const AnimalPage = () => {
         <div className="mt-4">
         <Link to={'/account/owners/owner/'+ownerid} className=" bg-green-500 "><FaHistory color="green" /></Link>
        </div>
-       <h3 className="text-center font-serif font-bold mt-6 ">No data</h3>
-       {animal.vaccinationdata && animal.vaccinationdata.length > 0 && animal.vaccinationdata.map(animal=>(
        
-       <div>
-        <Link to={`/account/owners/getanimal/${animal._id}/${owner._id}`} className="inline-flex gap-1 rounded-2xl border border-green-400 mt-4 py-2 px-2">
-            <p className="font-bold font-sm">{animal.animal_name}</p>,
-           
-            
-        </Link>
+       <Link to={`/account/owners/animalhealth/${animal._id}/${ownerid}`} className="inline-flex gap-1 rounded-2xl border border-green-400 mt-4 py-2 px-2 mb-2 hover:bg-green-500 hover:text-white">Add Health data</Link>
+
+        <table className="border px-2 border-green-500 rounded-xl  table-fixed">
+        <thead>
+          <tr>
+          <th className="px-2 font-bold font-sm">Disease</th>
+          <th className="px-2 font-bold font-sm">Vaccinated</th>
+          <th className="px-2 font-bold font-sm">Attended By</th>
+          <th className="px-2 font-bold font-sm">Location</th>
+          <th className="px-2 font-bold font-sm">Attended On</th>
+          <th className="px-2 font-bold font-sm">Next Visit</th>
+          </tr>
+        </thead>
+          
+        <tbody>
+        {animal.vaccinationdata && animal.vaccinationdata.length > 0 && animal.vaccinationdata.map(item=>(
        
-       </div>
+       <tr key={item._id} className="bg-green-100">
+         <td className="pl-2 font-sm ">{item.disease_name}</td>
+         <td className="pl-2 font-sm ">{item.vaccinated}</td>
+         <td className="pl-2 font-sm ">{item.by_name}</td>
+         <td className="pl-2 font-sm ">{item.at_name}</td>
+         <td className="pl-2 font-sm ">{item.vaccinated_on}</td>
+         <td className="pl-2 font-sm ">{item.next_vaccination}</td>
+       </tr>
 
        ))}
+        </tbody>
+          
+        
+
+          </table> 
+       
       </div>
      </div>
      
