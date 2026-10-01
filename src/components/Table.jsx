@@ -1,147 +1,182 @@
-import { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useGlobalFilter, useSortBy, useTable } from "react-table";
-import {FaTelegramPlane, FaRenren, FaHouseUser, FaArrowDown, FaArrowUp} from "react-icons/fa";
+import { FaSort, FaSortUp, FaSortDown, FaUserCheck, FaMicrochip, FaPaw, FaVenusMars } from "react-icons/fa";
 import Searchdb from "./Searchdb";
 
-
-
-function Table({datax}) {
-
-  // Use the state and functions returned from useTable to build your UI
- 
-  const data = useMemo(()=>
-    [
-      {
-        "id":"1",
-        "name": "Nchima",
-        "born": "Namibia"
-      },
-      {
-        "id":"2",
-        "name": "Nchima",
-        "born": "Namibia"
-      }
-    ]
-)
-  const columns = useMemo(()=>
-    [
+function Table({ datax = [] }) {
+  const columns = useMemo(
+    () => [
       {
         Header: "ID",
-      accessor: "_id"
+        accessor: "_id",
       },
       {
-        Header: "Name",
-        accessor: "animal_name"
+        Header: "Patient Name",
+        accessor: "animal_name",
+        Cell: ({ value }) => (
+          <div className="flex items-center gap-2.5 font-bold text-slate-900">
+            <span className="p-1.5 rounded-lg bg-teal-50 text-teal-600 border border-teal-100">
+              <FaPaw className="text-xs" />
+            </span>
+            <span>{value || "—"}</span>
+          </div>
+        ),
       },
       {
-        Header: "Chip Number",
-        accessor: "animal_chip"
+        Header: "Microchip ID",
+        accessor: "animal_chip",
+        Cell: ({ value }) => (
+          <div className="inline-flex items-center gap-1.5 font-mono text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md border border-slate-200">
+            <FaMicrochip className="text-slate-400 text-[10px]" />
+            <span>{value || "NO CHIP"}</span>
+          </div>
+        ),
       },
       {
-        Header: "Breed",
-        accessor: "animal_breed"
+        Header: "Breed / Specie",
+        accessor: "animal_breed",
+        Cell: ({ value }) => (
+          <span className="text-slate-600 font-medium">{value || "Mixed / Unspecified"}</span>
+        ),
       },
       {
         Header: "Sex",
-        accessor: "animal_sex"
-      }
-
+        accessor: "animal_sex",
+        Cell: ({ value }) => {
+          const isFemale = String(value).toLowerCase().startsWith("f");
+          return (
+            <span
+              className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold ${
+                isFemale
+                  ? "bg-rose-50 text-rose-700 border border-rose-200"
+                  : "bg-sky-50 text-sky-700 border border-sky-200"
+              }`}
+            >
+              <FaVenusMars className="text-[10px]" />
+              {value || "Unknown"}
+            </span>
+          );
+        },
+      },
     ],
-    []);
+    []
+  );
 
-const animalsdata = useMemo(()=>[...datax], [datax]);
-const animalsColumns = useMemo(()=>datax[0] ? Object.keys(datax[0]).filter((key)=> key !== "rating").map((key)=>{
-  return {Header: key, accessor: key}
+  const animalsdata = useMemo(() => (Array.isArray(datax) ? [...datax] : []), [datax]);
 
-})  : [], [datax] );
+  const tableHooks = (hooks) => {
+    hooks.visibleColumns.push((cols) => [
+      ...cols,
+      {
+        id: "Edit",
+        Header: "Owner & History",
+        Cell: ({ row }) => (
+          <Link
+            to={`/account/getanimalowner/${row.values._id}`}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-700 hover:border-teal-500 hover:text-teal-700 hover:bg-teal-50/50 shadow-sm transition-all"
+          >
+            <FaUserCheck className="text-teal-600" />
+            <span>View Owner</span>
+          </Link>
+        ),
+      },
+    ]);
+  };
 
+  const initialState = { hiddenColumns: ["_id"] };
 
-const tableHooks = (hooks)=>{
-  hooks.visibleColumns.push((columns)=>[
-    ...columns,
+  const tableInstance = useTable(
     {
-      id: "Edit",
-      Header: "Owner",
-      Cell:({row})=>(
-        <Link className="" to={`/account/getanimalowner/${row.values._id}`} >
-           <FaHouseUser color="green" />
-        </Link>  
-      )
-    }  
-  ])
+      columns,
+      data: animalsdata,
+      initialState,
+    },
+    tableHooks,
+    useGlobalFilter,
+    useSortBy
+  );
 
-}
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    preGlobalFilteredRows,
+    setGlobalFilter,
+    state,
+  } = tableInstance;
 
-const initialState = {hiddenColumns: ['_id']};
-
- const tableInstance = useTable({columns:columns,
-                                 data: animalsdata,
-                                initialState},
-                                 tableHooks,
-                                 useGlobalFilter,
-                                 useSortBy
-                               );
-
-
- const {getTableProps, getTableBodyProps,
-        headerGroups, rows, prepareRow, 
-        preGlobalFilteredRows, setGlobalFilter, state} = tableInstance;
-
-
-  // Render the UI for your table and the styles
   return (
-  <div className="mt-16 flex flex-col">
-
-
-        <Searchdb preGlobalFilteredRows={preGlobalFilteredRows} 
+    <div className="flex flex-col mt-4">
+      {/* Search Header */}
+      <Searchdb
+        preGlobalFilteredRows={preGlobalFilteredRows}
         setGlobalFilter={setGlobalFilter}
-         globalFilter={state.globalFilter}  />
-         
-            <div className="-my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8">
-              <div  className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                <div className="shadow overflow-hidden border border-green-400 sm:rounded-lg">
-                    
-                <table {...getTableProps()} className="min-w-full divide-y divide-green-400">
-                <thead>
-                                    {headerGroups.map((headerGroup)=>(
-                                      <tr {...headerGroup.getHeaderGroupProps()}>
+        globalFilter={state.globalFilter}
+      />
 
-                                        {headerGroup.headers.map((column)=>(
-                                          <th {...column.getHeaderProps(column.getSortByToggleProps())} className="px-6 py-5 text-left text-20 font-medium text-gray-400 uppercase rounded-sm tracking-wider">
-                                             {column.render("Header")} 
-                                             {column.isSorted ? (column.isSortedDesc ? <FaArrowDown/> : <FaArrowUp/>) : "" }
-                                          </th>
-                                        ))}
-
-
-                                      </tr>
-                                    ))}
-                                  </thead>
-                                  <tbody {...getTableBodyProps()}>
-
-                                    {rows.map((row)=>{
-
-                                      prepareRow(row);
-
-                                      return <tr {...row.getRowProps()}  className="hover:bg-green-200">
-                                      {row.cells.map((cell, idx)=>(
-                                        <td {...cell.getCellProps()} className="px-6 py-2 whitespace-nowrap uppercase">
-                                           {cell.render("Cell")}
-                                        </td>
-                                      ))}
-                                      </tr>
-
-                                    })}
-
-                                  </tbody>
-                  </table>
-                 
-
-                </div>
-              </div>
-          </div>
-         </div>
+      {/* Modern EHR Card Table */}
+      <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
+        <div className="overflow-x-auto">
+          <table {...getTableProps()} className="min-w-full divide-y divide-slate-200 text-left text-sm">
+            <thead className="bg-slate-50/90 text-slate-500 uppercase text-[11px] font-bold tracking-wider">
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <th
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                      className="px-6 py-4 select-none cursor-pointer hover:text-slate-800 transition-colors"
+                    >
+                      <div className="flex items-center gap-1.5">
+                        <span>{column.render("Header")}</span>
+                        {column.isSorted ? (
+                          column.isSortedDesc ? (
+                            <FaSortDown className="text-teal-600 text-xs" />
+                          ) : (
+                            <FaSortUp className="text-teal-600 text-xs" />
+                          )
+                        ) : (
+                          <FaSort className="text-slate-300 text-[10px]" />
+                        )}
+                      </div>
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()} className="divide-y divide-slate-100 bg-white">
+              {rows.length > 0 ? (
+                rows.map((row) => {
+                  prepareRow(row);
+                  return (
+                    <tr
+                      {...row.getRowProps()}
+                      className="hover:bg-teal-50/30 transition-colors duration-150 group"
+                    >
+                      {row.cells.map((cell) => (
+                        <td {...cell.getCellProps()} className="px-6 py-3.5 whitespace-nowrap">
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan={columns.length + 1} className="px-6 py-12 text-center text-slate-400">
+                    <FaPaw className="mx-auto text-3xl text-slate-300 mb-2" />
+                    <p className="font-semibold text-slate-600">No animal records found</p>
+                    <p className="text-xs text-slate-400 mt-0.5">Try refining your search query</p>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   );
 }
 

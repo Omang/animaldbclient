@@ -2,13 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-input[type="text"], input[type="password"], input[type="email"], input[type="date"] {
-    @apply w-full border my-2 py-2 px-2 rounded-2xl;
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased selection:bg-teal-500 selection:text-white;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="date"],
+  select,
+  textarea {
+    @apply w-full bg-white border border-slate-200 text-slate-900 placeholder-slate-400 rounded-xl px-4 py-2.5 text-sm transition-all duration-200 outline-none;
+  }
+
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  input[type="email"]:focus,
+  input[type="date"]:focus,
+  select:focus,
+  textarea:focus {
+    @apply border-teal-500 ring-4 ring-teal-500/10 shadow-sm;
+  }
 }
-button{
-    @apply bg-green-300;
+
+/* Veterinary component helpers */
+.vet-glass-card {
+  @apply bg-white/90 backdrop-blur-md border border-slate-100 shadow-xl shadow-teal-950/5 rounded-2xl;
 }
-button.primary{
-    background-color: #16e038;
-    @apply p-2 text-white rounded-2xl;
+
+.vet-badge {
+  @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase;
+}
+
+button.primary {
+  @apply inline-flex items-center justify-center gap-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-medium px-5 py-2.5 rounded-xl shadow-md shadow-teal-600/20 active:scale-[0.98] transition-all duration-200 cursor-pointer;
+}
+
+/* Custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
