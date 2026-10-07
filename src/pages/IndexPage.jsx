@@ -48,15 +48,6 @@ const IndexPage = () => {
                 <span>{user ? 'Enter Clinical Portal' : 'Veterinary Staff Login'}</span>
                 <FaArrowRight className="text-xs ml-1" />
               </Link>
-
-              {!user && (
-                <Link
-                  to="/register"
-                  className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-700 font-semibold px-6 py-3 rounded-xl border border-slate-200 shadow-sm transition-all duration-200"
-                >
-                  <span>Register Practice</span>
-                </Link>
-              )}
             </div>
 
             {/* Quick Micro-stats */}

@@ -144,14 +144,6 @@ const LoginPage = () => {
                 <FaSignInAlt />
                 <span>Access Clinical Workspace</span>
               </button>
-
-              {/* Register link */}
-              <div className="text-center pt-4 border-t border-slate-100 text-xs text-slate-500">
-                New clinical practitioner?{' '}
-                <Link to="/register" className="font-bold text-teal-600 hover:underline">
-                  Create account
-                </Link>
-              </div>
             </form>
           )}
         </div>
